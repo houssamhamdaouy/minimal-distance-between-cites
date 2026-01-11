@@ -1,9 +1,12 @@
 #include <stdio.h>
 #include "graph.h"
+#include "tsp.h"
 
-int main() {
+int main(){
     Graphe g;
-    float distances[max]; 
+    int eficace[max];
+    int s = 0;
+
     
     crea_graph(&g, 6);
     add_edge(&g,0,1,2);
@@ -16,19 +19,19 @@ int main() {
     add_edge(&g,4,3,3);
     add_edge(&g,4,5, 2);
 
-
-
-
-
     display(&g);
 
-    int start=0;
-    dijkstra(&g,start,distances);
+    
+    
+    
+    cal_tsp(&g, s, eficace);
 
-    printf("\nla plus court distance de la vile %d:\n",start);
-    for (int i=0;i<g.nbv;i++){
-        printf("a la ville %d: %.1f\n", i, distances[i]);
+    
+    printf("Meilleur chemin : %d", s);
+    for (int i = 0; i < g.nbv - 1; i++) {
+        printf(" -> %d", eficace[i]);
     }
+    printf(" -> %d\n", s);
 
     return 0;
 }

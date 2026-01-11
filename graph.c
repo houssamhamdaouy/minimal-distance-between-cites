@@ -23,7 +23,7 @@ void add_edge(Graphe *g,int start,int end,float distance){
 }
 
 
-void display(Graphe *g) {
+void display(Graphe *g){
     printf("\nrepresantation de la matrice des ville (Total des villes: %d):\n", g->nbv);
     for(int i=0;i<g->nbv;i++){
         for(int j=0;j<g->nbv;j++){
