@@ -28,11 +28,13 @@ void display(Graphe *g){
     for(int i=0;i<g->nbv;i++){
         for(int j=0;j<g->nbv;j++){
             if(g->mtx[i][j]==inf) 
-                printf("  +INF  ");
+                printf("+INF | ");
             else 
-                printf("%f ", g->mtx[i][j]);
+                printf("%.2f | ", g->mtx[i][j]);
         }
         printf("\n");
+        
+
     }
 }
 
@@ -59,6 +61,27 @@ void dijkstra(Graphe *g,int s, float dist[]) {
                 && dist[u]+g->mtx[u][v]<dist[v]) {
                 dist[v]=dist[u]+g->mtx[u][v];
             }
+        }
+    }
+}
+
+
+void pre_mtx_dijkstra(Graphe *g){
+    float nouv[max][max];
+    float temp[max];
+
+   
+    for (int i=0;i<g->nbv;i++){
+        dijkstra(g,i,temp);
+        for (int j=0;j<g->nbv;j++) {
+            nouv[i][j]=temp[j];
+        }
+    }
+
+
+    for (int i =0;i<g->nbv;i++){
+        for (int j=0; j<g->nbv;j++){
+            g->mtx[i][j]=nouv[i][j];
         }
     }
 }

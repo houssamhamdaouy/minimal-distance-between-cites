@@ -47,5 +47,5 @@ void cal_tsp(Graphe *g,int start_city,int best_path[]) {
     tsp_brute_force(g,cities,0,count-1,start_city,&min_dist,best_path);
     
     
-    printf("\nDistance minimale trouvee : %.2f\n", min_dist);
+    printf("\nDistance minimale trouvee : %.2f\n",min_dist);
 }
