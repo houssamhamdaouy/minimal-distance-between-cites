@@ -85,3 +85,22 @@ void pre_mtx_dijkstra(Graphe *g){
         }
     }
 }
+
+void load_graph(Graphe *g, char *filename) {
+    FILE *fp = fopen(filename, "r");
+    if (fp == NULL) {
+        printf("Erreur d'ouverture du fichier.\n");
+        return;
+    }
+    int n;
+    fscanf(fp, "%d", &n); 
+    crea_graph(g, n);
+    
+    int u, v;
+    float w;
+    while (fscanf(fp, "%d %d %f", &u, &v, &w) != EOF) {
+        add_edge(g, u, v, w);
+    }
+    
+    fclose(fp);
+}
