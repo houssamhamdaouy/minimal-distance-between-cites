@@ -38,7 +38,6 @@ void display(Graphe *g){
     }
 }
 
-
 void dijkstra(Graphe *g,int s, float dist[]) {
     int visited[max]={0};
     for (int i=0;i<g->nbv;i++){

@@ -16,6 +16,8 @@ int main() {
     int start;
     int choix;
 
+    
+
     printf("\n============================================\n");
     printf("   PROJET TSP - OPTIMISATION DE TOURNEE   \n");
     printf("============================================\n");
@@ -31,6 +33,14 @@ int main() {
         load_graph_from_file(&g,file);
     } else {
         load_graph_from_file(&g,"cities.txt");
+    }
+
+    float p[max][max];
+    for(int i=0;i<g.nbv;i++){
+        for(int j=0;j<g.nbv;j++){
+            p[i][j]=g.mtx[i][j];
+        }
+        
     }
 
     //  step 3 
@@ -79,6 +89,34 @@ int main() {
         printf(" -> %s\n", g.nomville[start]);
     }
     printf("============================================\n");
+    printf("si tu veux les matrice de graphe press 1 si no press 0 : ");
+    int a;
+    scanf("%d",&a);
+    if(a==1){
+
+    printf("matrice avant le remplisage");
+    printf("\n");
+    for(int i=0;i<g.nbv;i++){
+        for(int j=0;j<g.nbv;j++){
+            if(p[i][j]==inf) 
+                printf("+inf | ");
+            else 
+                printf("%.2f | ", p[i][j]);
+        }
+        printf("\n");
+        
+
+    }
+    printf("\n");
+    printf("matrice apret le remplisage");
+    display(&g);}
+
+
+
+
+    printf("============================================\n");
+
+
 
     return 0;
 }
