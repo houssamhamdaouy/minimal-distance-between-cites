@@ -28,7 +28,7 @@ void display(Graphe *g){
     for(int i=0;i<g->nbv;i++){
         for(int j=0;j<g->nbv;j++){
             if(g->mtx[i][j]==inf) 
-                printf("+INF | ");
+                printf("+inf | ");
             else 
                 printf("%.2f | ", g->mtx[i][j]);
         }
@@ -84,4 +84,39 @@ void pre_mtx_dijkstra(Graphe *g){
             g->mtx[i][j]=nouv[i][j];
         }
     }
+}
+
+void load_graph_from_file(Graphe *g,const char *file){
+    FILE *f=fopen(file,"r");
+    if(!f){
+        printf("ERREUR: Impossible d'ouvrir %s\n",file);
+        exit(1);
+    }
+    
+    int n;
+    fscanf(f,"%d",&n); 
+    crea_graph(g,n);
+
+  
+    for(int i=0;i<n;i++) {
+        fscanf(f,"%s",g->nomville[i]);
+    }
+
+   
+    int u,v;
+    float w;
+    while(fscanf(f,"%d %d %f",&u,&v,&w)!=EOF) {
+        add_edge(g,u,v,w);
+    }
+    fclose(f);
+}
+int is_graph_connected(Graphe *g,int start){
+    for(int i=0;i<g->nbv;i++) {
+        if(g->mtx[start][i]>=inf) {
+            printf("ERREUR CRITIQUE: La ville '%s' est inaccessible depuis '%s' !\n", 
+                   g->nomville[i],g->nomville[start]);
+            return 0; 
+        }
+    }
+    return 1; 
 }
